@@ -4,12 +4,13 @@ gem 'rails', '4.2.1'
 
 gem 'rails-api'
 
-gem 'spring', :group => :development
-
 gem 'pg'
 
 gem 'rake'
-gem 'haml'
+
+group :development do
+  gem 'spring'
+end
 
 group :test do
   gem 'rspec'
@@ -17,6 +18,7 @@ group :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'capybara'
+  gem 'rack-test', require: 'rack/test'
 end
 
 # To use ActiveModel has_secure_password
