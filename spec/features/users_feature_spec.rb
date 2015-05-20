@@ -7,8 +7,8 @@ def app
 end
 
 feature 'users' do
-  scenario '' do
-    get '/'
+  scenario 'making sure rack test works and that there is a user route' do
+    get '/users'
     assert last_response.ok?
   end
 
