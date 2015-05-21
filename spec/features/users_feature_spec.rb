@@ -14,7 +14,7 @@ feature 'users' do
 
   scenario 'we can access a user' do
     @user = User.create(name: 'Bob')
-    get '/users/1'
+    get '/users/17'
     expect(JSON.parse(last_response.body)['name']).to eq 'Bob'
     # Test fails, but this works: curl -X GET http://localhost:3000/users/2
   end
@@ -23,5 +23,6 @@ feature 'users' do
     post '/users', name: 'JoeBob'
     expect(JSON.parse(last_response.body)['name']).to eq 'JoeBob'
     # This test will pass when I remove the require from the params in the controller
+    # This works: curl -X POST -d "name=Steve" http://localhost:3000/users
   end
 end
