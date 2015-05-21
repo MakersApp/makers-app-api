@@ -19,7 +19,7 @@ feature 'users' do
     # curl -X GET http://localhost:3000/users/2
   end
 
-  scenario 'are created when route receives a name racktest' do
+  scenario 'are created when route receives a name' do
     post '/users', name: 'JoeBob'
     expect(JSON.parse(last_response.body)['name']).to eq 'JoeBob'
     # curl -X POST -d "name=Steve" http://localhost:3000/users
