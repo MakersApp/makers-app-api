@@ -5,10 +5,10 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-require 'rspec/core/rake_task'
-require 'rubocop/rake_task'
+# require 'rspec/core/rake_task'
+# require 'rubocop/rake_task'
 
-RuboCop::RakeTask.new :cop
-RSpec::Core::RakeTask.new :spec
+# RuboCop::RakeTask.new :cop
+# RSpec::Core::RakeTask.new :spec
 
-task default: [:cop, :spec]
+# task default: [:cop, :spec]
