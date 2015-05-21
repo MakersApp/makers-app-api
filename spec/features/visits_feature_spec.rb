@@ -20,6 +20,7 @@ feature 'visits' do
 
   scenario 'sends a message to Slack' do
     post 'users/1/visits/', user_id: 1
-    expect(JSON.parse(last_response.body)['text']).to eq "Bob has arrived"
+    expect(JSON.parse(last_response.body).to_s).to include ":sanjsanj:"
+    # curl -X POST --data-urlencode 'payload={"channel": "#visitors", "username": "webhookbot", "text": "Nikesh says, hey @james, you sure are looking great today.", "icon_emoji": ":nikesh:",  "link_names": 1}' https://hooks.slack.com/services/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
   end
 end

@@ -8,6 +8,8 @@ gem 'pg'
 
 gem 'rake'
 
+gem 'slack-notifier'
+
 group :development do
   gem 'spring'
 end
