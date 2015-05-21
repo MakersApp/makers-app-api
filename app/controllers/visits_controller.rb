@@ -3,8 +3,9 @@ class VisitsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @user.visit.create(visit_params)
+    @visit = Visit.new(visit_params)
+    @visit.save
+    render json: @visit
   end
 
   def visit_params
