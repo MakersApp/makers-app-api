@@ -8,7 +8,7 @@ end
 
 feature 'visits' do
   scenario 'exist in the API' do
-    get '/visits'
+    get 'users/1/visits'
     assert last_response.ok?
   end
 end

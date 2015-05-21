@@ -7,14 +7,15 @@ def app
 end
 
 feature 'users' do
-  scenario 'making sure rack test works and that there is a user route' do
+  scenario 'exist in the API' do
     get '/users'
     assert last_response.ok?
   end
 
-  scenario 'we can access a user' do
-    @user = User.create(name: 'Bob')
-    get '/users/17'
+  scenario 'can be accessed via get request' do
+    new_user = User.create(name: 'Bob')
+    get "/users/#{new_user.id}"
+    p new_user.id
     expect(JSON.parse(last_response.body)['name']).to eq 'Bob'
     # curl -X GET http://localhost:3000/users/2
   end
