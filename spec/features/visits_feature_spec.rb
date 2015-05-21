@@ -17,4 +17,9 @@ feature 'visits' do
     expect(JSON.parse(last_response.body)['user_id']).to eq 1
     # curl -X POST -d "user_id=2" http://localhost:3000/users/2/visits
   end
+
+  scenario 'sends a message to Slack' do
+    post 'users/1/visits/', user_id: 1
+    expect(JSON.parse(last_response.body)['text']).to eq "Bob has arrived"
+  end
 end
