@@ -12,14 +12,16 @@ feature 'users' do
     assert last_response.ok?
   end
 
+  scenario 'we can access a user' do
+    @user = User.create(name: 'Bob')
+    get '/users/1'
+    expect(JSON.parse(last_response.body)['name']).to eq 'Bob'
+    # Test fails, but this works: curl -X GET http://localhost:3000/users/2
+  end
+
   scenario 'are created when route receives a name racktest' do
-    post '/users/new', params: "name: 'Joe'"
-    expect(last_response.body).to contain "Joe"
+    post '/users', name: 'JoeBob'
+    expect(JSON.parse(last_response.body)['name']).to eq 'JoeBob'
+    # This test will pass when I remove the require from the params in the controller
   end
 end
-
-# scenario 'are created when route receives a name capybara' do
-#   page.driver.post('/users/new', params: { name: 'Joe' })
-#   expect(page.driver.status_code).to eq 200
-# end
-# http://www.suffix.be/blog/capybara-post-requests
