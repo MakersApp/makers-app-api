@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
-
 gem 'rails', '4.2.1'
 
 gem 'rails-api'
@@ -9,6 +7,8 @@ gem 'rails-api'
 gem 'pg'
 
 gem 'rake'
+
+gem 'slack-notifier'
 
 group :development do
   gem 'spring'

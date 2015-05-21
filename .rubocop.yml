@@ -75,7 +75,7 @@ Style/BlockComments:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Max: 500
 
 AllCops:
   Exclude:
