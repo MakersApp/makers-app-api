@@ -16,6 +16,7 @@ feature 'visits' do
     post 'users/1/visits/', user_id: 1
     expect(JSON.parse(last_response.body)['user_id']).to eq 1
     # curl -X POST -d "user_id=3" http://localhost:3000/users/3/visits
+    # curl -X POST -d "user_id=2" https://makersvisitorapi.herokuapp.com/users/1/visits
   end
 
   scenario 'change status to checked in when a user arrives' do
@@ -26,6 +27,7 @@ feature 'visits' do
     visit = Visit.find(visit.id)
     expect(visit.checkedin).to eq true
     # curl -X PATCH -d "checkedin=true" http://localhost:3000/users/2/visits/1
+    # curl -X PATCH -d "checkedin=true" https://makersvisitorapi.herokuapp.com/users/1/visits/1
   end
 
   scenario 'sends a message to Slack' do
