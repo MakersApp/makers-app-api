@@ -30,7 +30,7 @@ feature 'visits' do
     # curl -X PATCH -d "checkedin=true" https://makersvisitorapi.herokuapp.com/users/1/visits/1
   end
 
-  scenario 'sends a message to Slack' do
+  scenario 'sends a message to Slack with correct visitor name' do
     user = User.create(name: 'James')
     visit = Visit.create(user_id: user.id)
     patch "users/#{user.id}/visits/#{visit.id}", checkedin: true

@@ -14,6 +14,7 @@ class VisitsController < ApplicationController
   def update
     visit = Visit.find(params[:id])
     visit.update(visit_params)
+    @visitor_name = (User.find(visit.user_id)).name
     notify_slack
   end
 
@@ -28,7 +29,7 @@ class VisitsController < ApplicationController
                                    username: "webhookbot",
                                    icon_emoji: ":sanjsanj:",
                                    link_names: 1
-    notifier.ping "Hello @soc, Dan has arrived"
+    notifier.ping "Hello @soc, #{@visitor_name} has arrived"
     render json: notifier
   end
 end
