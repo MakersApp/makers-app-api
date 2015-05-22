@@ -15,7 +15,6 @@ feature 'users' do
   scenario 'can be accessed via get request' do
     new_user = User.create(name: 'Bob')
     get "/users/#{new_user.id}"
-    p new_user.id
     expect(JSON.parse(last_response.body)['name']).to eq 'Bob'
     # curl -X GET http://localhost:3000/users/2
   end

@@ -7,7 +7,7 @@ gem 'rails-api'
 gem 'pg'
 
 gem 'rake'
-
+gem 'byebug'
 gem 'slack-notifier'
 
 group :development do

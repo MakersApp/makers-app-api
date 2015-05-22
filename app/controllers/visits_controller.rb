@@ -1,7 +1,10 @@
-require 'slack-notifier'
+# require 'slack-notifier'
 
 class VisitsController < ApplicationController
   def index
+  end
+
+  def show
   end
 
   def create
@@ -11,8 +14,13 @@ class VisitsController < ApplicationController
     # notify_slack
   end
 
+  def update
+    visit = Visit.find(params[:id])
+    visit.update(visit_params)
+  end
+
   def visit_params
-    params.permit(:user_id)
+    params.permit(:user_id, :checkedin)
   end
 
   # def notify_slack
