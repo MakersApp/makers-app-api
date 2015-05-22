@@ -1,5 +1,3 @@
-# require 'slack-notifier'
-
 class VisitsController < ApplicationController
   def index
   end
