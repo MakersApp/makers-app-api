@@ -24,7 +24,12 @@ class VisitsController < ApplicationController
   end
 
   def notify_slack
-    notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#private_soc_channel', username: "webhookbot", icon_emoji: ":sanjsanj:", link_names: 1
+    slack_webhook = "https://hooks.slack.com/services/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"
+    notifier = Slack::Notifier.new slack_webhook,
+                                   channel: '#private_soc_channel',
+                                   username: "webhookbot",
+                                   icon_emoji: ":sanjsanj:",
+                                   link_names: 1
     notifier.ping "Hello @soc, Dan has arrived"
     render json: notifier
   end
