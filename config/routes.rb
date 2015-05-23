@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :show, :new, :create] do
-    resources :visits
-  end
-
-  resource :team_members
+  resources :users, only: [:index, :show, :new, :create]
+  resources :visits
+  resource :team_members, only: [:index, :show, :new, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

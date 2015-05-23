@@ -19,7 +19,7 @@ class VisitsController < ApplicationController
   end
 
   def visit_params
-    params.permit(:user_id, :checkedin)
+    params.permit(:team_member, :phone_id, :checkedin)
   end
 
   def notify_slack

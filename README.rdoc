@@ -1,6 +1,21 @@
-API for the Makers app
+API for the Makers Academy visitor app
 by @james-miller, @M1lena, @rjlynch and @saramoohead
+==============
 
-Run Rails server
-Bundle install
-Install PostgreSQL database
+Structure
+---------
+- Users tell the app their name; app sends name and unique phone id to API
+- Users tell the app which Team Member they are meeting; app sends team member and unique phone id to API
+- The API creates a Visit tying User and Team Member together
+- When the User comes into proximity of the beacon at Makers Academy, the app sends a POST request with phone id, to change the Visit status to "checked in"
+- When the visit becomes "checked in", the API sends a message to the Makers Academy #visitor Slack channel, targeting the Team Member, informing them exactly who has arrived.
+
+Routes
+-------
+After much inernal debate, we have not nested visits inside users. This decision was taken in the context of the visits route primarily being used for POST requests, and it was cleaner to hit the the main route with the app's information than to force the app to take details from the API to make the request.
+
+To manipulate the files
+-----------------------
+- Run Rails server
+- Bundle install
+- Install PostgreSQL database
