@@ -1,4 +1,9 @@
 class VisitsController < ApplicationController
+
+  DEFAULT_SLACK_CHANNEL = '#private_soc_channel'
+  SLACK_USERNAME = "webhookbot"
+  USERNAME_ICON = ":sanjsanj:"
+
   def index
   end
 
@@ -14,7 +19,6 @@ class VisitsController < ApplicationController
   def update
     @visit_to_update = Visit.find_by(phone_id: visit_params["phone_id"])
     @visit_to_update.update(checkedin: true)
-    @user = User.find_by(phone_id: visit_params["phone_id"])
     notify_slack if @visit_to_update.checkedin = true
   end
 
@@ -23,16 +27,20 @@ class VisitsController < ApplicationController
   end
 
   def notify_slack
-    visitor_name = @user.name
-    team_member = @visit_to_update.team_member
-
-    slack_webhook = "https://hooks.slack.com/services/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"
+    slack_webhook = Rails.application.secrets.slack_webhook
     notifier = Slack::Notifier.new slack_webhook,
-                                   channel: '#private_soc_channel',
-                                   username: "webhookbot",
-                                   icon_emoji: ":sanjsanj:",
+                                   channel: DEFAULT_SLACK_CHANNEL,
+                                   username: SLACK_USERNAME,
+                                   icon_emoji: USERNAME_ICON,
                                    link_names: 1
-    notifier.ping "Hello @#{team_member}, #{visitor_name} has arrived"
-    render json: notifier
+    grab_slack_details
+    notifier.ping @slack_details
+  end
+
+  def grab_slack_details
+    visitor_name = (User.find_by(phone_id: visit_params["phone_id"])).name
+    team_member = @visit_to_update.team_member
+    @slack_details = "Hello @#{team_member}, #{visitor_name} has arrived"
+    render json: @slack_details
   end
 end

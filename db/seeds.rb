@@ -13,4 +13,7 @@ team_members = TeamMember.create([{name: "Nikesh", slack_name: "nikesh", image_p
   {name: "Spike", slack_name: "spike", image_path: "https://avatars3.githubusercontent.com/u/7307631"},
   {name: "Ruben", slack_name: "ruben", image_path: "http://www.makersacademy.com/images/people/team/ruben.jpg"},
   {name: "Jordan", slack_name: "jordanmaker", image_path: "http://www.makersacademy.com/images/people/team/jordan.jpg"},
+  {name: "Event", slack_name: "", image_path: "public/images/event_makers.jpg"},
   {name: "Not known", slack_name: "channel", image_path: "/public/images/logo-red-circle.png"}])
+
+User.create(name: "Timmy", phone_id: "asdf")
