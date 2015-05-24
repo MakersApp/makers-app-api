@@ -10,5 +10,9 @@ feature 'team members' do
     get '/team_members'
     expect(JSON.parse(last_response.body).count).to eq 8
   end
-  # curl -X GET http://localhost:3000/team_members
 end
+
+# curls to visually test
+
+# ACCESS ALL TEAM MEMBERS
+# curl -X GET http://localhost:3000/team_members

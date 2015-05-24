@@ -10,7 +10,6 @@ feature 'visits' do
   scenario 'are created when route receives a team member' do
     post "/visits", team_member: 'Nikesh', phone_id: 'asdf'
     expect(JSON.parse(last_response.body)['team_member']).to eq 'Nikesh'
-    # curl -X POST -d "team_member=Nikesh&phone_id=asdf" http://localhost:3000/visits
   end
 
   let!(:user) { User.create(name: 'James', phone_id: 'asdf') }
@@ -23,16 +22,26 @@ feature 'visits' do
       patch "/checkin", phone_id: 'asdf'
       checked_in_visit = Visit.find_by(phone_id: visit.phone_id)
       expect(checked_in_visit.checkedin).to eq true
-      # curl -X PATCH -d "phone_id=qwerty" http://localhost:3000/checkin
     end
 
     scenario 'the API sends a message to Slack' do
       patch "/checkin", phone_id: 'asdf'
       expect(JSON.parse(last_response.body).to_s).to include ":sanjsanj:"
-      # curl -X POST --data-urlencode 'payload={"channel": "#visitors", "username": "webhookbot", "text": "Hey @james, you sure are looking great today.", "icon_emoji": ":sanjsanj:",  "link_names": 1}' https://hooks.slack.com/services/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
     end
 
     xscenario 'the message has the correct user and team member name' do
+      expect slack_details[team_member].to eq "Nikesh"
     end
   end
 end
+
+# curls for visual testing:
+
+# CREATE A VISIT
+# curl -X POST -d "team_member=Nikesh&phone_id=asdf" http://localhost:3000/visits
+
+# CHECK IN A USER
+# curl -X PATCH -d "phone_id=qwerty" http://localhost:3000/checkin
+
+# SEND YOUR OWN SLACK MESSAGE
+# curl -X POST --data-urlencode 'payload={"channel": "#visitors", "username": "webhookbot", "text": "Hey @james, you sure are looking great today.", "icon_emoji": ":sanjsanj:",  "link_names": 1}' https://hooks.slack.com/services/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
