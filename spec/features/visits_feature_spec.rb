@@ -18,6 +18,8 @@ feature 'visits' do
   context 'when user checks in' do
 
     scenario 'visit status changes to checked in' do
+      stub_request(:any, Rails.application.secrets.slack_webhook)
+
       expect(visit.checkedin).to eq false
       patch "/checkin", phone_id: 'asdf'
       checked_in_visit = Visit.find_by(phone_id: visit.phone_id)
@@ -25,13 +27,15 @@ feature 'visits' do
     end
 
     scenario 'the API sends a message to Slack' do
+      stub_request(:any, Rails.application.secrets.slack_webhook)
+
       patch "/checkin", phone_id: 'asdf'
-      assert last_response.ok?
+      expect(WebMock).to have_requested(:post, Rails.application.secrets.slack_webhook)
     end
 
     xscenario 'the message has the correct user and team member name' do
       patch "/checkin", phone_id: 'asdf'
-      expect @slack_details[team_member].to eq "Nikesh"
+      expect(JSON.parse(last_response.body).to_s).to include 'Nikesh'
     end
   end
 end

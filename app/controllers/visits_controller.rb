@@ -1,6 +1,5 @@
 class VisitsController < ApplicationController
 
-  SLACK_WEBHOOK = "https://hooks.slack.com/services/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"
   DEFAULT_SLACK_CHANNEL = '#private_soc_channel'
   SLACK_USERNAME = "webhookbot"
   USERNAME_ICON = ":sanjsanj:"
@@ -28,7 +27,8 @@ class VisitsController < ApplicationController
   end
 
   def notify_slack
-    notifier = Slack::Notifier.new SLACK_WEBHOOK,
+    slack_webhook = Rails.application.secrets.slack_webhook
+    notifier = Slack::Notifier.new slack_webhook,
                                    channel: DEFAULT_SLACK_CHANNEL,
                                    username: SLACK_USERNAME,
                                    icon_emoji: USERNAME_ICON,
@@ -41,5 +41,6 @@ class VisitsController < ApplicationController
     visitor_name = (User.find_by(phone_id: visit_params["phone_id"])).name
     team_member = @visit_to_update.team_member
     @slack_details = "Hello @#{team_member}, #{visitor_name} has arrived"
+    render json: @slack_details
   end
 end

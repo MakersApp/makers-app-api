@@ -8,7 +8,7 @@ feature 'team members' do
 
   scenario 'are available to be called by the app' do
     get '/team_members'
-    expect(JSON.parse(last_response.body).count).to eq 8
+    expect(JSON.parse(last_response.body).count).to eq 9
   end
 end
 
