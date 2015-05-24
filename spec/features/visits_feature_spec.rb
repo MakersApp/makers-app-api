@@ -2,8 +2,6 @@ require 'rails_helper'
 
 feature 'visits' do
 
-  let(:user) { User.create(name: 'James') }
-
   scenario 'exist in the API' do
     get "/visits"
     assert last_response.ok?
@@ -15,16 +13,18 @@ feature 'visits' do
     # curl -X POST -d "team_member=Nikesh&phone_id=asdf" http://localhost:3000/visits
   end
 
+  let(:user) { User.create(name: 'James', phone_id: 'asdf') }
   let(:visit) { Visit.create(team_member: 'Nikesh', phone_id: 'asdf') }
 
   context 'when user checks in' do
 
     scenario 'visit status changes to checked in' do
       expect(visit.checkedin).to eq false
+      user # must invoke user inside test for it to pass
       patch "/checkin", checkedin: true, phone_id: 'asdf'
-      checked_in_visit = Visit.find(visit.id)
+      checked_in_visit = Visit.find_by(phone_id: visit.phone_id)
       expect(checked_in_visit.checkedin).to eq true
-      # curl -X PATCH -d "checkedin=true" http://localhost:3000/users/2/visits/1
+      # curl -X PATCH -d "phone_id="qwerty"&checkedin=true" http://localhost:3000/checkin
     end
 
     xscenario 'the API sends a message to Slack' do

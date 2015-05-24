@@ -12,9 +12,10 @@ class VisitsController < ApplicationController
   end
 
   def update
-    visit = Visit.find(params[:id])
-    visit.update(visit_params)
-    @visitor_name = (User.find(visit.user_id)).name
+    visit = Visit.find_by(phone_id: visit_params["phone_id"])
+    visit.update(checkedin: visit_params["checkedin"])
+    user = User.find_by(phone_id: visit_params["phone_id"])
+    @visitor_name = user.name
     notify_slack
   end
 
