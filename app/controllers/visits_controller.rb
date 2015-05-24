@@ -14,7 +14,6 @@ class VisitsController < ApplicationController
   def update
     @visit_to_update = Visit.find_by(phone_id: visit_params["phone_id"])
     @visit_to_update.update(checkedin: true)
-    @user = User.find_by(phone_id: visit_params["phone_id"])
     notify_slack if @visit_to_update.checkedin = true
   end
 
@@ -23,16 +22,24 @@ class VisitsController < ApplicationController
   end
 
   def notify_slack
-    visitor_name = @user.name
-    team_member = @visit_to_update.team_member
+    grab_slack_webhook
+  end
 
+  def grab_slack_webhook
+    grab_slack_details
     slack_webhook = "https://hooks.slack.com/services/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"
     notifier = Slack::Notifier.new slack_webhook,
                                    channel: '#private_soc_channel',
                                    username: "webhookbot",
                                    icon_emoji: ":sanjsanj:",
                                    link_names: 1
-    notifier.ping "Hello @#{team_member}, #{visitor_name} has arrived"
+    notifier.ping "Hello @#{@slack_details[:team_member]}, #{@slack_details[:visitor_name]} has arrived"
     render json: notifier
+  end
+
+  def grab_slack_details
+    user_name = User.find_by(phone_id: visit_params["phone_id"])
+    team_member = @visit_to_update.team_member
+    @slack_details = { visitor_name: user_name.name, team_member: team_member }
   end
 end
