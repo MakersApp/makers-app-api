@@ -13,22 +13,21 @@ feature 'visits' do
     # curl -X POST -d "team_member=Nikesh&phone_id=asdf" http://localhost:3000/visits
   end
 
-  let(:user) { User.create(name: 'James', phone_id: 'asdf') }
-  let(:visit) { Visit.create(team_member: 'Nikesh', phone_id: 'asdf') }
+  let!(:user) { User.create(name: 'James', phone_id: 'asdf') }
+  let!(:visit) { Visit.create(team_member: 'Nikesh', phone_id: 'asdf') }
 
   context 'when user checks in' do
 
     scenario 'visit status changes to checked in' do
       expect(visit.checkedin).to eq false
-      user # must invoke user inside test for it to pass
-      patch "/checkin", checkedin: true, phone_id: 'asdf'
+      patch "/checkin", phone_id: 'asdf'
       checked_in_visit = Visit.find_by(phone_id: visit.phone_id)
       expect(checked_in_visit.checkedin).to eq true
-      # curl -X PATCH -d "phone_id="qwerty"&checkedin=true" http://localhost:3000/checkin
+      # curl -X PATCH -d "phone_id=qwerty" http://localhost:3000/checkin
     end
 
-    xscenario 'the API sends a message to Slack' do
-      patch "/visits", checkedin: true, phone_id: 'asdf'
+    scenario 'the API sends a message to Slack' do
+      patch "/checkin", phone_id: 'asdf'
       expect(JSON.parse(last_response.body).to_s).to include ":sanjsanj:"
       # curl -X POST --data-urlencode 'payload={"channel": "#visitors", "username": "webhookbot", "text": "Hey @james, you sure are looking great today.", "icon_emoji": ":sanjsanj:",  "link_names": 1}' https://hooks.slack.com/services/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
     end
