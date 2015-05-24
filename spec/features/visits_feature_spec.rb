@@ -31,8 +31,6 @@ feature 'visits' do
 
     xscenario 'the message has the correct user and team member name' do
       patch "/checkin", phone_id: 'asdf'
-      p "*" * 20
-      p last_response
       expect @slack_details[team_member].to eq "Nikesh"
     end
   end
