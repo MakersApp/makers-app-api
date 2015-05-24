@@ -35,7 +35,6 @@ class VisitsController < ApplicationController
                                    link_names: 1
     grab_slack_details
     notifier.ping @slack_details
-    render json: notifier
   end
 
   def grab_slack_details
