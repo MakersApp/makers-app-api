@@ -6,6 +6,8 @@ gem 'rails-api'
 
 gem 'pg'
 
+gem 'dotenv-rails'
+
 gem 'rake'
 gem 'byebug'
 gem 'slack-notifier'
@@ -14,6 +16,7 @@ gem 'rspec'
 gem 'rspec-rails'
 gem 'rubocop'
 gem 'rubocop-rspec'
+gem 'webmock'
 
 group :development do
   gem 'spring'

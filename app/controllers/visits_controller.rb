@@ -27,7 +27,7 @@ class VisitsController < ApplicationController
 
   def grab_slack_webhook
     grab_slack_details
-    slack_webhook = "https://hooks.slack.com/services/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"
+    slack_webhook = Rails.application.secrets.slack_webhook
     notifier = Slack::Notifier.new slack_webhook,
                                    channel: '#private_soc_channel',
                                    username: "webhookbot",
