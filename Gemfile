@@ -12,17 +12,16 @@ gem 'rake'
 gem 'byebug'
 gem 'slack-notifier'
 
-gem 'rspec'
-gem 'rspec-rails'
-gem 'rubocop'
-gem 'rubocop-rspec'
-gem 'webmock'
-
 group :development do
   gem 'spring'
 end
 
 group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'webmock'
   gem 'capybara'
   gem 'rack-test', require: 'rack/test'
 end
