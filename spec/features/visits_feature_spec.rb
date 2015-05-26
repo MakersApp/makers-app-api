@@ -34,10 +34,8 @@ feature 'visits' do
     end
 
     scenario 'the API sends a JSON object if the user is already checked in' do
-      # stub_request(:any, Rails.application.secrets.slack_webhook)
       visit.update(checkedin: true)
       get "/visits", phone_id: 'asdf'
-      # expect(WebMock).to have_requested(:post, Rails.application.secrets.slack_webhook)
       expect(JSON.parse(last_response.body)['checkedin']).to eq true
     end
   end
