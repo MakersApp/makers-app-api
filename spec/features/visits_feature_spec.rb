@@ -33,9 +33,10 @@ feature 'visits' do
       expect(WebMock).to have_requested(:post, Rails.application.secrets.slack_webhook)
     end
 
-    xscenario 'the message has the correct user and team member name' do
-      patch "/checkin", phone_id: 'asdf'
-      expect(JSON.parse(last_response.body).to_s).to include 'Nikesh'
+    scenario 'the API sends a JSON object if the user is already checked in' do
+      visit.update(checkedin: true)
+      get "/visits", phone_id: 'asdf'
+      expect(JSON.parse(last_response.body)['checkedin']).to eq true
     end
   end
 end

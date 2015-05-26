@@ -5,15 +5,14 @@ class VisitsController < ApplicationController
   USERNAME_ICON = ":sanjsanj:"
 
   def index
-  end
-
-  def show
+    visit = Visit.find_by(phone_id: visit_params["phone_id"])
+    render json: visit
   end
 
   def create
-    @visit = Visit.new(visit_params)
-    @visit.save
-    render json: @visit
+    visit = Visit.new(visit_params)
+    visit.save
+    render json: visit
   end
 
   def update
