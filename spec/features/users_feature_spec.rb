@@ -22,7 +22,7 @@ end
 # curls for visual testing:
 
 # CREATE A USER
-# curl -X POST -d "name=Steve" http://localhost:3000/users
+# curl -X POST -d "name=Steve&phone_id=qwerty" http://localhost:3000/users
 
 # ACCESS A USER
 # curl -X GET http://localhost:3000/users/2

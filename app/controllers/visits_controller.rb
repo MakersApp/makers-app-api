@@ -19,6 +19,7 @@ class VisitsController < ApplicationController
     @visit_to_update = Visit.find_by(phone_id: visit_params["phone_id"])
     @visit_to_update.update(checkedin: true)
     notify_slack if @visit_to_update.checkedin = true
+    render json: @visit_to_update
   end
 
   def visit_params
@@ -40,6 +41,5 @@ class VisitsController < ApplicationController
     visitor_name = (User.find_by(phone_id: visit_params["phone_id"])).name
     team_member = @visit_to_update.team_member
     @slack_details = "Hello @#{team_member}, #{visitor_name} has arrived"
-    render json: @slack_details
   end
 end
