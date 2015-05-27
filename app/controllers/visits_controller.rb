@@ -6,7 +6,10 @@ class VisitsController < ApplicationController
 
   def index
     visit = Visit.find_by(phone_id: visit_params["phone_id"])
-    render json: visit
+    user = User.find_by(phone_id: visit_params["phone_id"])
+    user_and_visit = JSON.parse(visit.to_json)
+    user_and_visit["username"] = user.name
+    render json: user_and_visit
   end
 
   def create
