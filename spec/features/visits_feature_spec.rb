@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'visits' do
 
   scenario 'exist in the API' do
-    get "/visits"
+    get "/visits", phone_id: 'asdf'
     assert last_response.ok?
   end
 
