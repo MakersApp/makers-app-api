@@ -8,7 +8,9 @@ Rails.application.load_tasks
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
-RuboCop::RakeTask.new :cop
-RSpec::Core::RakeTask.new :spec
+if ENV['RAILS_ENV'] == "test"
+  RuboCop::RakeTask.new :cop
+  RSpec::Core::RakeTask.new :spec
+end
 
 task default: [:cop, :spec]
