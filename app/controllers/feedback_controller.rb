@@ -9,7 +9,7 @@ class FeedbackController < ApplicationController
       'entry.1639198320' => name,
       'entry.526227826' => comments,
       'entry.2030410404' => nps,
-      'entry.843495276' => email,
+      'entry.1316854425' => email,
       'entry.1128867892' => mailing_list
       )
   end
