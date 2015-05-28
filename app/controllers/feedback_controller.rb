@@ -2,17 +2,24 @@ require 'net/http'
 
 class FeedbackController < ApplicationController
 
-  def send_form(name, enjoyed_visit, more_q, email)
+  def send_form(name, comments, nps, email, mailing_list)
     uri = Rails.application.secrets.google_form_url
 
-    res = Net::HTTP.post_form(URI.parse(uri), 'entry.1639198320' => name, 'entry.571908240' => enjoyed_visit, 'entry.207225403' => more_q, 'entry.843495276' => email)
+    res = Net::HTTP.post_form(URI.parse(uri),
+      'entry.1639198320' => name,
+      'entry.526227826' => comments,
+      'entry.2030410404' => nps,
+      'entry.843495276' => email,
+      'entry.1128867892' => mailing_list
+      )
   end
 
   def new
-    name = User.find_by(phone_id: params["phone_id"]).name
-    enjoyed_visit = params["enjoyed"] ? "Yes" : "No"
-    more_q = params["questions"]
+    name = User.find_by(phone_id: params["phoneID"]).name
+    comments = params["question"]
+    nps = params["nps"]
     email = params["email"]
-    send_form(name, enjoyed_visit, more_q, email)
+    mailing_list = params["joinMailingList"]
+    send_form(name, comments, nps, email, mailing_list)
   end
 end

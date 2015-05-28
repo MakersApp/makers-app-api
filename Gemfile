@@ -9,11 +9,11 @@ gem 'pg'
 gem 'dotenv-rails'
 
 gem 'rake'
-gem 'byebug'
 gem 'slack-notifier'
 
 group :development do
   gem 'spring'
+  gem 'byebug'
 end
 
 group :test do
