@@ -1,8 +1,7 @@
 API for the Makers Academy visitor app
 by @james-miller, @M1lena, @rjlynch and @saramoohead
 ==============
-[![Build Status](https://travis-ci.org/MakersApp/makers-app-api.svg?branch=traivs)](https://travis-ci.org/MakersApp/makers-app-api)
-
+{<img src="https://travis-ci.org/MakersApp/makers-app-api.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/MakersApp/makers-app-api]
 Structure
 ---------
 - Users tell the app their name; app sends name and unique phone id to API
