@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 feature 'feedback' do
-    puts User.all
+    User.all.each do |user|
+      puts user
+    end
   scenario 'is sent via API call' do
     stub_request(:any, Rails.application.secrets.google_form_url)
 
