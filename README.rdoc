@@ -1,6 +1,7 @@
 API for the Makers Academy visitor app
 by @james-miller, @M1lena, @rjlynch and @saramoohead
 ==============
+[![Build Status](https://travis-ci.org/MakersApp/makers-app-api.svg?branch=traivs)](https://travis-ci.org/MakersApp/makers-app-api)
 
 Structure
 ---------
