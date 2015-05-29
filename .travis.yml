@@ -9,4 +9,5 @@ script: bundle exec rspec spec
 script:
   - bundle exec bin/rake db:create
   - bundle exec bin/rake db:migrate
+  - bundle exec bin/rake db:seed
   - bundle exec rspec spec
